@@ -15,7 +15,7 @@ public with sharing class PBBSharing {
 		list<sObject> shares = new list<sObject>();
 
 		for (ShareRecordRequest SRR:requests){
-			if (srr.AccessLevel!=null){Srr.AccessLevel = 'Edit'; } //defaulting optional level
+			if (srr.AccessLevel==null){Srr.AccessLevel = 'Edit'; } //defaulting optional level
 
 			//what are we dealing with here?
 			Schema.sObjectType ot = SRR.RecordId.getSObjectType();
@@ -30,6 +30,7 @@ public with sharing class PBBSharing {
 			if (string.valueOf(ot)=='Account'){
 				share = dealWithAccounts(share, SRR);
 			}
+			system.debug(share);
 			shares.add(share);
 		}
 		insert shares;		
