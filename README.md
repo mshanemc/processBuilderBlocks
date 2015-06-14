@@ -15,7 +15,7 @@ Contents:
  * uses an @future method to avoid mixed DML issues
  * There is a test class for this one, because every org will have PermissionSets available. 
  * Because I did the testing, it's all nicely bulkified
-*PBBDashboardRefresh
+* **PBBDashboardRefresh**
  * Refresh a dashboard from Process Builder (say, when opportunities change stage, you want anyone see the dashboard to have the lastest update!)
  * Requires a remote site setup for self-calls (ex: if you're na16.salesforce.com, then there's a remote site for that)
  * no error handling--fails silently if the call gets 401, 404, bad request, limits hit, etc
