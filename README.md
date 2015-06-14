@@ -22,6 +22,7 @@ Contents:
  * uses an @future method to avoid mixed DML issues
  * There is a test class for this one, because every org will have PermissionSets available. 
  * Because I did the testing, it's all nicely bulkified
+
 ###Refresh a Dashboard (PBBDashboardRefresh)
 
 **Why** You want to refresh a dashboard when stuff happens, like refreshing your opportunity dashboard after someone edits an opportunity so that anyone who views it has the latest and greatest data
