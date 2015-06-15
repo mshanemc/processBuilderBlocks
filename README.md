@@ -34,18 +34,18 @@ Contents:
 
 ###Refresh a Dashboard (PBBDashboardRefresh)
 
-**Why** You want to refresh a dashboard when stuff happens, like refreshing your opportunity dashboard after someone edits an opportunity so that anyone who views it has the latest and greatest data
+**Why**: You want to refresh a dashboard when stuff happens, like refreshing your opportunity dashboard after someone edits an opportunity so that anyone who views it has the latest and greatest data
 
  * Requires a remote site setup for self-calls (ex: if you're na16.salesforce.com, then there's a remote site for that)
  * no error handling--fails silently if the call gets 401, 404, bad request, limits hit, etc
  * does handle bulk scenarios (built in batching)
  * no tests since I can't programmatically create a dashboard OR make callouts to get your actual dashboards from apex test
 
- ###Give a Thanks Badge (GiveWorksThanksAction) [credit to David Scruggs!]
+###Give a Thanks Badge (GiveWorksThanksAction)
 
- **Why** Give badges when people do something...for example, marking an opportunity closed/won that's above a certain $ amount or getting perfect scores on a customer satisfaction survey.
+**Why**: Give badges when people do something...for example, marking an opportunity closed/won that's above a certain $ amount or getting perfect scores on a customer satisfaction survey.
 
- * Requires that work.com thanks be enabled (it's free, just turn it on in the setup menu)
- * Specify the badge name, who it's from, the thanks message, and who it's to
- * this creates the thanks and posts it to chatter
+* Requires that work.com thanks be enabled (it's free, just turn it on in the setup menu)
+* Specify the badge name, who it's from, the thanks message, and who it's to
+* this creates the thanks and posts it to chatter
 
