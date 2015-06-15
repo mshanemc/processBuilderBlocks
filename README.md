@@ -40,3 +40,12 @@ Contents:
  * no error handling--fails silently if the call gets 401, 404, bad request, limits hit, etc
  * does handle bulk scenarios (built in batching)
  * no tests since I can't programmatically create a dashboard OR make callouts to get your actual dashboards from apex test
+
+ ###Give a Thanks Badge (GiveWorksThanksAction) [credit to David Scruggs!]
+
+ **Why** Give badges when people do something...for example, marking an opportunity closed/won that's above a certain $ amount or getting perfect scores on a customer satisfaction survey.
+
+ * Requires that work.com thanks be enabled (it's free, just turn it on in the setup menu)
+ * Specify the badge name, who it's from, the thanks message, and who it's to
+ * this creates the thanks and posts it to chatter
+
