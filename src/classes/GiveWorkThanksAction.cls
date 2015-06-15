@@ -25,7 +25,7 @@ global without sharing class GiveWorkThanksAction {
 				newWorkBadge.DefinitionId = workBadgeDef.Id;
 				newWorkBadge.RecipientId = request.receiverId;
 				newWorkBadge.SourceId = newWorkThanks.Id ;
-				newWorkBadge.CreatedById = request.giverId;
+				//newWorkBadge.GiverId = request.giverId;
 
 		insert newWorkBadge;
 
