@@ -12,7 +12,7 @@ Contents:
 
 * pass it a record Id, and whatever that is gets deleted
 * doesn't check for delete permissions or anything like that
-* doesn't handle any errors that may occur\
+* doesn't handle any errors that may occur
 * use with caution.  Your process could have users deleting themselves and crazy stuff like that.
 
 ###"Manually" share records (PBBSharing)
