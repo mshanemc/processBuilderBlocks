@@ -1,6 +1,6 @@
 global without sharing class GiveWorkThanksAction {
 
-	@InvocableMethod(label='Convert Leads')
+	@InvocableMethod(label='Give a Thanks Badge')
 	global static void giveWorkBadgeActionsBatch(List<GiveWorkThanksRequest> requests) {
 		for(GiveWorkThanksRequest request: requests){
 			giveWorkBadgeAction(request);
