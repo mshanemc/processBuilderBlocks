@@ -6,6 +6,15 @@ Apex classes with invocable methods to allow Process Builder to do more broadly 
 </a>
 
 Contents:
+###Delete (PBBDelete)
+
+**Why**: the thing you've always wanted to do from declarative workflow!
+
+* pass it a record Id, and whatever that is gets deleted
+* doesn't check for delete permissions or anything like that
+* doesn't handle any errors that may occur\
+* use with caution.  Your process could have users deleting themselves and crazy stuff like that.
+
 ###"Manually" share records (PBBSharing)
 
 **Why**: you have sharing rules that are more complex than what the declarative sharing rules provide for
