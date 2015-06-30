@@ -5,11 +5,10 @@ Apex classes with invocable methods to allow Process Builder to do more broadly 
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
-Demo video
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RJvga1rFFsA" frameborder="0" allowfullscreen></iframe>
+[![Demo Video](https://dl.dropboxusercontent.com/u/8451460/salesforce%20blog/PBBVideoPreview.png)](https://www.youtube.com/watch?v=RJvga1rFFsA&feature=youtu.be)
 
 Contents:
-###Delete (PBBDelete)
+###Delete (PBBDelete) 
 
 **Why**: the thing you've always wanted to do from declarative workflow!
 
