@@ -5,10 +5,11 @@ Apex classes with invocable methods to allow Process Builder to do more broadly 
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
+###Demo Video of all the components
 [![Demo Video](https://dl.dropboxusercontent.com/u/8451460/salesforce%20blog/PBBVideoPreview.png)](https://www.youtube.com/watch?v=RJvga1rFFsA&feature=youtu.be)
 
 Contents:
-###Delete (PBBDelete) 
+###Delete (PBBDelete) [Vid shortcut](https://www.youtube.com/watch?v=RJvga1rFFsA&t=45s)
 
 **Why**: the thing you've always wanted to do from declarative workflow!
 
@@ -17,7 +18,7 @@ Contents:
 * doesn't handle any errors that may occur
 * use with caution.  Your process could have users deleting themselves and crazy stuff like that.
 
-###"Manually" share records (PBBSharing)
+###"Manually" share records (PBBSharing) [Vid shortcut](https://www.youtube.com/watch?v=RJvga1rFFsA&t=234s)
 
 **Why**: you have sharing rules that are more complex than what the declarative sharing rules provide for
 
@@ -25,7 +26,7 @@ Contents:
  * known to support custom objects and some permutations of account (there's lots of complexity on account and I haven't tested them all)
  * I didn't write a test for this one--there's not guarantee that an org will have any __c custom object that this stuff depends on.
 
-###Assign Permission Sets to Users (PBBAddPermSet)
+###Assign Permission Sets to Users (PBBAddPermSet) [Vid shortcut](https://www.youtube.com/watch?v=RJvga1rFFsA&t=522s)
 
 **Why**: You use permission sets, and assign them based on rules about the user/profile/etc.  Automate that!
 
@@ -34,7 +35,7 @@ Contents:
  * There is a test class for this one, because every org will have PermissionSets available. 
  * Because I did the testing, it's all nicely bulkified
 
-###Refresh a Dashboard (PBBDashboardRefresh)
+###Refresh a Dashboard (PBBDashboardRefresh) [Vid shortcut](https://www.youtube.com/watch?v=RJvga1rFFsA&t=650s)
 
 **Why**: You want to refresh a dashboard when stuff happens, like refreshing your opportunity dashboard after someone edits an opportunity so that anyone who views it has the latest and greatest data
 
@@ -43,7 +44,7 @@ Contents:
  * does handle bulk scenarios (built in batching)
  * no tests since I can't programmatically create a dashboard OR make callouts to get your actual dashboards from apex test
 
-###Give a Thanks Badge (GiveWorksThanksAction)
+###Give a Thanks Badge (GiveWorksThanksAction) [Vid shortcut](https://www.youtube.com/watch?v=RJvga1rFFsA&t=865s)
 
 **Why**: Give badges when people do something...for example, marking an opportunity closed/won that's above a certain $ amount or getting perfect scores on a customer satisfaction survey.
 
