@@ -5,7 +5,7 @@ Apex classes with invocable methods to allow Process Builder to do more broadly 
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
-###Demo Video of all the components
+###Demo Video of all the components (except the last, new one)
 [![Demo Video](https://dl.dropboxusercontent.com/u/8451460/salesforce%20blog/PBBVideoPreview.png)](https://www.youtube.com/watch?v=RJvga1rFFsA&feature=youtu.be)
 
 Contents:
@@ -51,4 +51,11 @@ Contents:
 * Requires that work.com thanks be enabled (it's free, just turn it on in the setup menu)
 * Specify the badge name, who it's from, the thanks message, and who it's to
 * this creates the thanks and posts it to chatter
+
+###Apex debug
+
+**Why**: It's hard to see what's going on in Process Builder sometimes.  You just want to write a debug statement, right?
+
+* you pass it a simple string
+* you can make it "formula" so that you can log information from the objects involved
 

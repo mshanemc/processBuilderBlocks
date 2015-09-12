@@ -40,6 +40,17 @@ private class TestPBB {
 		
 	}
 
+    @isTest static void testDebug(){
+    	list<string> comments = new list<string>();
+        comments.add('hello');
+        comments.add('world');
+        system.debug(comments);
+        
+        test.startTest();
+        PBBApexDebug.AddDebug(comments);
+        test.stopTest();
+    }
+    
 	@isTest static void testPBBDelete() {		
 		list<account> accts = createAccts(5);
 		list<id> acctIds = new list<id>();

@@ -6,7 +6,7 @@ public with sharing class PBBAddPermSet {
 		list<string> output = new list<string>();
 
 		for (AddPermSetRequest request:requests){
-			system.debug(request);
+			//system.debug(request);
 			//future methods can only accept primitives, so we serialize to a list of string
 			output.add(JSON.serialize(request));
 		}
@@ -45,4 +45,3 @@ public with sharing class PBBAddPermSet {
 	}
 
 }
-
