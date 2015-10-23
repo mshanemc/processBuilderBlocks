@@ -5,7 +5,7 @@ Apex classes with invocable methods to allow Process Builder to do more broadly 
        src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
 </a>
 
-###Demo Video of all the components (except the last, new one)
+###Demo Video of all the components (except the last, newest ones)
 [![Demo Video](https://dl.dropboxusercontent.com/u/8451460/salesforce%20blog/PBBVideoPreview.png)](https://www.youtube.com/watch?v=RJvga1rFFsA&feature=youtu.be)
 
 Contents:
@@ -58,4 +58,11 @@ Contents:
 
 * you pass it a simple string
 * you can make it "formula" so that you can log information from the objects involved
+
+###Apex Lock/Unlock records
+
+**Why**: When a record gets to a certain stage, you just want to lock/unlock it.  You used to have to create a dummy approval process and auto-submit to achieve this.
+
+* **You MUST activate a setting to allow this (it's under Process Automation Settings in setup)**
+* you pass it the record Id that you want to lock
 
