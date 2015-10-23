@@ -1,4 +1,4 @@
-Apex classes with invocable methods to allow Process Builder to do more broadly applicable stuff
+Apex classes with invocable methods to allow Process Builder and Flows to do more stuff than what comes out of the box.
 
 <a href="https://githubsfdeploy.herokuapp.com?owner=mshanemc&repo=processBuilderBlocks">
   <img alt="Deploy to Salesforce"
