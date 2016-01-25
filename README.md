@@ -66,3 +66,11 @@ Contents:
 * **You MUST activate a setting to allow this (it's under Process Automation Settings in setup)**
 * you pass it the record Id that you want to lock
 
+###Chatter Follow
+
+**Why**: Some event happens, and you want people to follow a record based on some criteria.  
+
+* you pass it the recordId and the UserID of who you want to follow it
+* Apex generics, so it works for any object
+* it's actually smart enough to just ignore that request if Chatter isn't on, OR if that object doesn't have a chatter feed 
+

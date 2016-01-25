@@ -10,6 +10,40 @@ If needed, modify the last two methods here (for test data creation) to follow y
 @isTest
 private class TestPBB {
 	
+	@isTest static void testChatterFollow() {
+		list<user> users = createUsers(2);
+
+
+		list<PBBChatterFollow.ChatterFollow> CFs = new list<PBBChatterFollow.ChatterFollow>();	
+
+		user admin = createAdmin();
+
+		system.runAs(admin){
+			list<id> acctIds = getIds(createAccts(2));
+
+		
+
+			
+			for (user u:users){
+				for (id acctId:acctIds){
+					PBBChatterFollow.ChatterFollow CF = new PBBChatterFollow.ChatterFollow();
+					CF.UserId = u.Id;
+					CF.RecordId = acctId;
+					CFs.add(CF);
+				}
+			}	
+
+			test.startTest();	
+			PBBChatterFollow.FollowRecord(CFs);
+			test.stopTest();
+		
+			list<EntitySubscription> ESs = [select Id from EntitySubscription where parentId in: acctIds];
+			system.assertEquals(4, ESs.size());
+		}
+
+
+	}
+
 	//tests the class across a whole bunch of permissions being added.
 	@isTest static void testBulkPermSet() {
 		integer userCount=200;
@@ -51,13 +85,19 @@ private class TestPBB {
         test.stopTest();
     }
     
-	@isTest static void testPBBDelete() {		
-		list<account> accts = createAccts(5);
-		list<id> acctIds = new list<id>();
-		for (account a:accts){
-			acctIds.add(a.id);
-		}
+    @isTest static void testLock(){
+		list<id> acctIds = getIds(createAccts(5));
+		system.debug(acctIds);
+		PBBLock.LockRecord(acctIds);
+    }
 
+    @isTest static void testUnLock(){
+		list<id> acctIds = getIds(createAccts(5));
+		PBBUnLock.UnLockRecord(acctIds);
+    }
+
+	@isTest static void testPBBDelete() {				
+		list<id> acctIds = getIds(createAccts(5));
 		//there should be 5 accounts created
 		list<account> queriedAccts = [select Id from Account];
 		system.assertEquals(5, queriedAccts.size());
@@ -70,6 +110,31 @@ private class TestPBB {
 
 	}
 
+	@isTest static void testPBBDBReresh(){
+		map<string, string> headers = new map<string, string>(); 
+		headers.put('Content-Type', 'application/json');
+		//'Content-Type', 'application/json'
+		Test.setMock(HttpCalloutMock.class, new PBBCalloutMocks(200, 'OK', '{"foo":"bar"}', headers));
+
+		list<string> fakeDBs = fakeDBGenerator(300);
+
+		test.startTest();
+		PBBDashboardRefresh.RefreshDashboard(fakeDBs);
+		test.stopTest();
+	}
+
+	//test helpers below
+
+	public static list<string> fakeDBGenerator(integer recordCount){
+		
+		list<string> output = new list<string>();
+		for (integer i=0; i<recordCount; i++){
+			output.add('ADF0000000'+string.valueOf(i));
+		}
+		return output;
+	}
+	
+
 	private static PermissionSet createPermSet(){
 		PermissionSet PS = new PermissionSet();
 		PS.Label = 'perm set label';
@@ -78,6 +143,14 @@ private class TestPBB {
 		insert PS;
 		return PS;
 
+	}
+
+	public static list<id> getIds (list<sobject> sobjects){
+		list<id> output = new list<id>();
+		for (sobject SO:sobjects){
+			output.add((id)So.get('Id'));
+		}
+		return output;
 	}
 
 	public static list<account> createAccts(integer numberOfAccounts){
@@ -90,6 +163,28 @@ private class TestPBB {
 
 		insert output;
 		return output;
+	}
+
+	public static user createAdmin(){
+		Profile p = [SELECT Id FROM Profile WHERE Name='System Administrator'];
+
+		// create User
+        User u = new User();
+
+        u.FirstName = 'A';
+        u.LastName = 'S';
+        u.Email = 'test@test.com';
+        u.Username = 'astest@test.com';
+        u.Alias = 'astest';
+        u.ProfileId = p.Id;
+        u.TimeZoneSidKey    = 'America/Denver';
+        u.LocaleSidKey      = 'en_US';
+        u.EmailEncodingKey  = 'UTF-8';
+        u.LanguageLocaleKey = 'en_US';
+
+        insert u;
+        system.debug('u contains ' + u);
+        return u;
 	}
 
 	public static list<user> createUsers(integer numberOfUsers){
@@ -110,5 +205,7 @@ private class TestPBB {
 		insert users;
 		return users;
 	}
+
+
 
 }
