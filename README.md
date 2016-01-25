@@ -52,21 +52,21 @@ Contents:
 * Specify the badge name, who it's from, the thanks message, and who it's to
 * this creates the thanks and posts it to chatter
 
-###Apex debug
+###Apex debug (no video yet)
 
 **Why**: It's hard to see what's going on in Process Builder sometimes.  You just want to write a debug statement, right?
 
 * you pass it a simple string
 * you can make it "formula" so that you can log information from the objects involved
 
-###Apex Lock/Unlock records
+###Apex Lock/Unlock records (no video yet)
 
 **Why**: When a record gets to a certain stage, you just want to lock/unlock it.  You used to have to create a dummy approval process and auto-submit to achieve this.
 
 * **You MUST activate a setting to allow this (it's under Process Automation Settings in setup)**
 * you pass it the record Id that you want to lock
 
-###Chatter Follow
+###Chatter Follow (no video yet)
 
 **Why**: Some event happens, and you want people to follow a record based on some criteria.  
 
