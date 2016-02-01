@@ -74,3 +74,10 @@ Contents:
 * Apex generics, so it works for any object
 * it's actually smart enough to just ignore that request if Chatter isn't on, OR if that object doesn't have a chatter feed 
 
+###Lead Assignment Rules re-run
+
+**Why**: Some event happens, and you want to re-evaluate the lead assignment rules that usually only run on create
+
+* you pass it the recordId of the leads that you want the rules to run for
+* it runs your default (ie, the active) lead assignment rule
+* If you pass it recordIds of something that's not a lead, it just ignores it
