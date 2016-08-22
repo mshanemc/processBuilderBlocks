@@ -1,3 +1,9 @@
+/*
+Callout security rules still apply...add a remote site setting or it won't work.
+
+*/
+
+
 public with sharing class PBBThunder {
 	
 	@InvocableMethod(label='Send record(s) to Thunder / IoT Cloud')

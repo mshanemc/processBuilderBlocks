@@ -10,6 +10,17 @@ If needed, modify the last two methods here (for test data creation) to follow y
 @isTest
 private class TestPBB {
 	
+	@isTest static void testLeadReassign(){
+		list<Id> leadIds = getIds(createLeads(5));
+
+		test.startTest();
+		PBBRunAssignmentRules.ReRunAssignmentRules(leadIds);
+		test.StopTest();
+
+		
+	}
+
+
 	@isTest static void testChatterFollow() {
 		list<user> users = createUsers(2);
 
@@ -159,6 +170,18 @@ private class TestPBB {
 		for (integer i=0; i<numberOfAccounts; i++){
 			account a = new Account(Name = 'Account' + string.valueof(i));
 			output.add(a);
+		}
+
+		insert output;
+		return output;
+	}
+
+	public static list<lead> createLeads(integer numberOfLeads){
+		list<lead> output = new list<lead>();
+
+		for (integer i=0; i<numberOfLeads; i++){
+			lead L = new lead(LastName = 'LeadName' + string.valueof(i), Company='Company'+string.valueof(i));
+			output.add(L);
 		}
 
 		insert output;
