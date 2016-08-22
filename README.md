@@ -66,7 +66,7 @@ Contents:
 * **You MUST activate a setting to allow this (it's under Process Automation Settings in setup)**
 * you pass it the record Id that you want to lock
 
-###Chatter Follow (no video yet)
+###Chatter Follow [Video link](https://www.youtube.com/watch?v=D1Me5QFil1w)
 
 **Why**: Some event happens, and you want people to follow a record based on some criteria.  
 
