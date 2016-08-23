@@ -5,7 +5,7 @@ public with sharing class PBBAddPermSet {
 
 		list<string> output = new list<string>();
 
-		for (AddPermSetRequest request:requests){
+		for (AddPermSetRequest request:dedupe(requests)){
 			//system.debug(request);
 			//future methods can only accept primitives, so we serialize to a list of string
 			output.add(JSON.serialize(request));
@@ -22,6 +22,11 @@ public with sharing class PBBAddPermSet {
 
 		@InvocableVariable(required=true label='User Id')
 		public Id UserId;
+	}
+
+	public static list<AddPermSetRequest> dedupe(list<AddPermSetRequest> input){
+		set<AddPermSetRequest> temp = new set<AddPermSetRequest>(input);
+		return new list<AddPermSetRequest>(temp);
 	}
 
 	//has to be handled as an @future transaction because the mixed DML issue!

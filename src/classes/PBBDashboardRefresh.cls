@@ -14,7 +14,7 @@ public with sharing class PBBDashboardRefresh {
 
 		Integer Batchsize = Limits.GetLimitCallouts();
 
-		for (string dashboardId:dashboardIds){
+		for (string dashboardId:PBBUtilities.dedupe(DashboardIds)){
 			//batch is full, put it in the batch list, blank it for new adds
 			if (DBBatch.size()==Batchsize){
 				Batches.add(DBBatch);

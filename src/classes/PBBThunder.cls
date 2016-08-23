@@ -14,7 +14,7 @@ public with sharing class PBBThunder {
 
 		set<id> recordIds = new set<id>();
 
-		for (ThunderPostRequest tpr:requests){
+		for (ThunderPostRequest tpr:dedupe(requests)){
 			recordIds.add(tpr.recordId);
 			system.debug(recordIds);
 		}
@@ -77,6 +77,11 @@ public with sharing class PBBThunder {
 		@InvocableVariable(required=true label='endpoint' description='full url beginning with https://')
 		public string endpoint;
 
+	}
+
+	public static list<ThunderPostRequest> dedupe(list<ThunderPostRequest> input){
+		set<ThunderPostRequest> temp = new set<ThunderPostRequest>(input);
+		return new list<ThunderPostRequest>(temp);
 	}
 
 }

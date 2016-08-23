@@ -14,7 +14,7 @@ public with sharing class PBBSharing {
 
 		list<sObject> shares = new list<sObject>();
 
-		for (ShareRecordRequest SRR:requests){
+		for (ShareRecordRequest SRR:dedupe(requests)){
 			if (srr.AccessLevel==null){Srr.AccessLevel = 'Edit'; } //defaulting optional level
 
 			//what are we dealing with here?
@@ -95,8 +95,11 @@ public with sharing class PBBSharing {
 
 		@InvocableVariable(required=false label='Access Level')
 		public string AccessLevel;
+	}
 
 
-
+	public static list<ShareRecordRequest> dedupe(list<ShareRecordRequest> input){
+		set<ShareRecordRequest> temp = new set<ShareRecordRequest>(input);
+		return new list<ShareRecordRequest>(temp);
 	}
 }

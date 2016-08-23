@@ -20,6 +20,10 @@
 		<members>*</members>
 		<name>StaticResource</name>
 	</types>
-	
-	<version>34.0</version>
+	<types>
+		<members>AnythingPath</members>
+		<members>svgIcon</members>
+		<name>AuraDefinitionBundle</name>
+	</types>
+	<version>37.0</version>
 </Package>

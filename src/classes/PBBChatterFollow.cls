@@ -5,14 +5,21 @@ public with Sharing class  PBBChatterFollow {
 
 		//the following two lines fail silently if the request is nonsense.
 		//check that chatter is on
-		if ( ! Schema.SObjectType.User.isFeedEnabled()) return;
+		if ( ! Schema.SObjectType.User.isFeedEnabled() ) {
+			system.debug('user does not have chatter');
+			return;
+		}
 		//check that the object in question has a feed
-		if ( ! CFs[0].RecordId.getSobjectType().getDescribe().isFeedEnabled()) return;
+		if ( ! CFs[0].RecordId.getSobjectType().getDescribe().isFeedEnabled() ) {
+			system.debug('object does not have chatter');
+			system.debug(CFs[0].RecordId);			
+			return;
+		}
 
 
 		list<EntitySubscription> ESs = new list<EntitySubscription>();
 
-		for (ChatterFollow CF:CFs){
+		for (ChatterFollow CF:dedupe(CFs)){
 			EntitySubscription ES = new EntitySubscription();
 			ES.subscriberId = CF.UserId;
 			ES.parentId = CF.RecordId;			
@@ -32,5 +39,10 @@ public with Sharing class  PBBChatterFollow {
 		@InvocableVariable(required=true label='User Id')
 		public Id UserId;
 
+	}
+
+	public static list<ChatterFollow> dedupe(list<ChatterFollow> input){
+		set<ChatterFollow> temp = new set<ChatterFollow>(input);
+		return new list<ChatterFollow>(temp);
 	}
 }

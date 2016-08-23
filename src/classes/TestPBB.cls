@@ -23,7 +23,7 @@ private class TestPBB {
 
 	@isTest static void testChatterFollow() {
 		list<user> users = createUsers(2);
-
+		system.assertEquals(2, users.size());
 
 		list<PBBChatterFollow.ChatterFollow> CFs = new list<PBBChatterFollow.ChatterFollow>();	
 
@@ -31,12 +31,13 @@ private class TestPBB {
 
 		system.runAs(admin){
 			list<id> acctIds = getIds(createAccts(2));
+			system.assertEquals(2, acctIds.size());
 
-		
-
-			
 			for (user u:users){
+				system.debug('user is ' + u.Id);
 				for (id acctId:acctIds){
+					system.debug('acct is ' + acctId);
+
 					PBBChatterFollow.ChatterFollow CF = new PBBChatterFollow.ChatterFollow();
 					CF.UserId = u.Id;
 					CF.RecordId = acctId;
@@ -44,16 +45,24 @@ private class TestPBB {
 				}
 			}	
 
+			list<account> accountList = [select Id from Account];
+			system.assertEquals(2, accountList.size());
+
 			test.startTest();	
 			PBBChatterFollow.FollowRecord(CFs);
 			test.stopTest();
 		
 			list<EntitySubscription> ESs = [select Id from EntitySubscription where parentId in: acctIds];
-			system.assertEquals(4, ESs.size());
+			if (Schema.SObjectType.Account.isFeedEnabled() ){
+				system.assertEquals(4, ESs.size());				
+			} else {
+				system.assertEquals(0, ESs.size());				
+			}
 		}
 
 
 	}
+
 
 	//tests the class across a whole bunch of permissions being added.
 	@isTest static void testBulkPermSet() {
