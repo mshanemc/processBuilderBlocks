@@ -20,6 +20,31 @@ private class TestPBB {
 		
 	}
 
+	@isTest static void testPBBThunder(){
+		list<Id> leadIds = getIds(createLeads(5));
+
+		map<string, string> headers = new map<string, string>(); 
+		headers.put('Content-Type', 'application/json');
+		//'Content-Type', 'application/json'
+		Test.setMock(HttpCalloutMock.class, new PBBCalloutMocks(200, 'OK', '{"foo":"bar"}', headers));
+
+
+		PBBThunder.ThunderPostRequest TPR = new PBBThunder.ThunderPostRequest();
+		tpr.fields = 'Id';
+		tpr.recordId = leadIds[0];
+		tpr.token = 'fakeToken';
+		tpr.endpoint = 'https://www.salesforce.com/fakeendpoint';
+
+		list<PBBThunder.ThunderPostRequest> TPRs = new list<PBBThunder.ThunderPostRequest>();
+		TPRs.add(TPR);
+
+		test.StartTest();
+
+		PBBThunder.SendToThunder(TPRs);
+		test.stopTest();
+
+	}
+
 
 	@isTest static void testChatterFollow() {
 		list<user> users = createUsers(2);
@@ -141,6 +166,39 @@ private class TestPBB {
 		test.startTest();
 		PBBDashboardRefresh.RefreshDashboard(fakeDBs);
 		test.stopTest();
+	}
+
+	@isTest static void testPBBSharing(){
+
+		//not goint to actually insert a share because I don't know what sharing a destination org may have on/off
+		//horrible test method just to get packageable coverage on the helper methods
+		list<lead> leads = createLeads(5);
+		list<user> users = createUsers(2);
+
+		PBBSharing.ShareRecordRequest srr = new PBBSharing.ShareRecordRequest();
+		srr.RecordId = leads[0].Id;
+		srr.UserId = users[0].Id;
+		srr.AccessLevel = 'Edit';
+
+		list<PBBSharing.ShareRecordRequest> shares = new list<PBBSharing.ShareRecordRequest>();
+		shares.add(srr);
+
+		user admin = createAdmin();
+
+		test.StartTest();
+		system.runAs(admin){
+			PBBSharing.dedupe(shares);
+
+			Schema.sObjectType ot = SRR.RecordId.getSObjectType();
+
+			PBBSharing.whatsTheAccessFieldCalled(ot);
+			PBBSharing.whatsTheIdFieldCalled(ot);
+			PBBSharing.getShareTable(ot);
+
+			
+		}
+		test.StopTest();
+
 	}
 
 	//test helpers below

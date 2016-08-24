@@ -5,7 +5,5 @@ public with sharing class PBBUtilities {
 		return new list<string>(temp);
 	}
 
-	public class PBException extends Exception {}
-
 	
 }
