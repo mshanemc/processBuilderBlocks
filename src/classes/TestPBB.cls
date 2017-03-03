@@ -260,12 +260,15 @@ private class TestPBB {
 
 		// create User
         User u = new User();
-
+	String orgId = UserInfo.getOrganizationId();
+    	String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+    	Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+    	String uniqueName = orgId + dateString + randomInt;
         u.FirstName = 'A';
         u.LastName = 'S';
-        u.Email = 'test@test.com';
-        u.Username = 'astest@test.com';
-        u.Alias = 'astest';
+        u.Email = uniqueName + '@test' + orgId + '.msm',;
+        u.Username = uniqueName + '@test' + orgId + '.msm';
+        u.Alias = uniqueName.substring(18, 23);
         u.ProfileId = p.Id;
         u.TimeZoneSidKey    = 'America/Denver';
         u.LocaleSidKey      = 'en_US';
