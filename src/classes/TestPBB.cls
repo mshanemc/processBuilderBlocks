@@ -271,7 +271,7 @@ private class TestPBB {
         u.LocaleSidKey      = 'en_US';
         u.EmailEncodingKey  = 'UTF-8';
         u.LanguageLocaleKey = 'en_US';
-	u.isActive = 'false';
+	u.isActive = 0;
 
         upsert u;
         system.debug('u contains ' + u);
