@@ -272,7 +272,7 @@ private class TestPBB {
         u.EmailEncodingKey  = 'UTF-8';
         u.LanguageLocaleKey = 'en_US';
 
-        insert u;
+        upsert u;
         system.debug('u contains ' + u);
         return u;
 	}
@@ -292,7 +292,7 @@ private class TestPBB {
 			users.add(u);
 		}
 
-		insert users;
+		upsert users;
 		return users;
 	}
 
