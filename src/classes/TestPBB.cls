@@ -266,7 +266,7 @@ private class TestPBB {
     	String uniqueName = orgId + dateString + randomInt;
         u.FirstName = 'A';
         u.LastName = 'S';
-        u.Email = uniqueName + '@test' + orgId + '.msm',;
+        u.Email = uniqueName + '@test' + orgId + '.msm';
         u.Username = uniqueName + '@test' + orgId + '.msm';
         u.Alias = uniqueName.substring(18, 23);
         u.ProfileId = p.Id;
