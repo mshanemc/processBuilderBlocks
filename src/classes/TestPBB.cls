@@ -273,7 +273,7 @@ private class TestPBB {
         u.LanguageLocaleKey = 'en_US';
 	u.isActive = false;
 
-        upsert u;
+        insert u;
         system.debug('u contains ' + u);
         return u;
 	}
