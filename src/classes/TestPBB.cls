@@ -285,7 +285,8 @@ private class TestPBB {
 
 		
 		for (integer i=0; i<numberOfUsers; i++){
-			string x = string.valueOf(i);
+			String orgId = UserInfo.getOrganizationId();
+			String x = string.valueOf(i);
 			String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
     			Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
     			String uniqueName = orgId + dateString + randomInt;
