@@ -271,7 +271,7 @@ private class TestPBB {
         u.LocaleSidKey      = 'en_US';
         u.EmailEncodingKey  = 'UTF-8';
         u.LanguageLocaleKey = 'en_US';
-	u.isActive = false;
+	//u.isActive = false;
 
         insert u;
         system.debug('u contains ' + u);
@@ -287,7 +287,7 @@ private class TestPBB {
 		for (integer i=0; i<numberOfUsers; i++){
 			string x = string.valueOf(i);
 			User u = new User(Alias = 't'+x, Email='standarduser'+x+'@testPBBPermSet.msm', 
-            EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', isActive=false,
+            EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', //isActive=false,
             LocaleSidKey='en_US', ProfileId = p.Id, 
             TimeZoneSidKey='America/Los_Angeles', UserName='standarduser'+x+'@testPBBPermSet.msm');
 			users.add(u);
