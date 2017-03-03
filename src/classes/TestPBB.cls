@@ -290,7 +290,7 @@ private class TestPBB {
 			String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
     			Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
     			String uniqueName = orgId + dateString + randomInt;
-			User u = new User(Alias = uniqueName + x, Email=uniqueName+x+'@testPBBPermSet.msm', 
+			User u = new User(Alias = uniqueName.substring(18, 23), Email=uniqueName + '@test' + orgId + '.msm', 
             EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', //isActive=false,
             LocaleSidKey='en_US', ProfileId = p.Id, 
             TimeZoneSidKey='America/Los_Angeles', UserName='standarduser'+x+'@testPBBPermSet.msm');
