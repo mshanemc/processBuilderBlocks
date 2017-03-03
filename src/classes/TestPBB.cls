@@ -286,7 +286,10 @@ private class TestPBB {
 		
 		for (integer i=0; i<numberOfUsers; i++){
 			string x = string.valueOf(i);
-			User u = new User(Alias = 't'+x, Email='standarduser'+x+'@testPBBPermSet.msm', 
+			String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+    			Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+    			String uniqueName = orgId + dateString + randomInt;
+			User u = new User(Alias = uniqueName + x, Email=uniqueName+x+'@testPBBPermSet.msm', 
             EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', //isActive=false,
             LocaleSidKey='en_US', ProfileId = p.Id, 
             TimeZoneSidKey='America/Los_Angeles', UserName='standarduser'+x+'@testPBBPermSet.msm');
