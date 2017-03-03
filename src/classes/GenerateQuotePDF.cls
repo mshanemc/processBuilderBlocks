@@ -1,14 +1,5 @@
 public with sharing class GenerateQuotePDF 
 {
-    //private final Id QuoteId = (Id) ApexPages.currentPage().getParameters().get('quoteId');
-    //private final Id QuotePDFTemplateId = (Id)Label.QuotePDFTemplate;
-
-    //public PageReference GenerateQuotePDFAndRedirectToQuotePage()
-    //{
-    //    GenerateQuoteDocument(QuoteId);
-    //    return new PageReference('/' + QuoteId);
-    //}
-
     @future(callout=true) public static void GenerateQuoteDocument(Id quotesId, Id QuotePDFTemplateId)
     {
         String quoteURL = '/quote/quoteTemplateDataViewer.apexp?id=' + quotesId
@@ -22,5 +13,5 @@ public with sharing class GenerateQuotePDF
         INSERT newQuoteDocument;
     }
     //@istest does not exist for this class because there is no way to query the quote templates directly in apex, 
-    //so the Template ID must be hard coded which would cause deployment to fail
+    //and since it is a required value the Template ID would need to be hard-coded which would cause deployment to fail, so...
 }
