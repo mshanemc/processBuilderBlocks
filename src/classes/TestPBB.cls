@@ -260,17 +260,21 @@ private class TestPBB {
 
 		// create User
         User u = new User();
-
+	String orgId = UserInfo.getOrganizationId();
+    	String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+    	Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+    	String uniqueName = orgId + dateString + randomInt;
         u.FirstName = 'A';
         u.LastName = 'S';
-        u.Email = 'test@test.com';
-        u.Username = 'astest@test.com';
-        u.Alias = 'astest';
+        u.Email = uniqueName + '@test' + orgId + '.msm';
+        u.Username = uniqueName + '@test' + orgId + '.msm';
+        u.Alias = uniqueName.substring(18, 23);
         u.ProfileId = p.Id;
         u.TimeZoneSidKey    = 'America/Denver';
         u.LocaleSidKey      = 'en_US';
         u.EmailEncodingKey  = 'UTF-8';
         u.LanguageLocaleKey = 'en_US';
+	//u.isActive = false;
 
         insert u;
         system.debug('u contains ' + u);
@@ -284,9 +288,13 @@ private class TestPBB {
 
 		
 		for (integer i=0; i<numberOfUsers; i++){
-			string x = string.valueOf(i);
-			User u = new User(Alias = 't'+x, Email='standarduser'+x+'@testPBBPermSet.msm', 
-            EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', 
+			String orgId = UserInfo.getOrganizationId();
+			String x = string.valueOf(i);
+			String dateString = String.valueof(Datetime.now()).replace(' ','').replace(':','').replace('-','');
+    			Integer randomInt = Integer.valueOf(math.rint(math.random()*1000000));
+    			String uniqueName = orgId + dateString + randomInt;
+			User u = new User(Alias = uniqueName.substring(18, 23), Email=uniqueName + '@test' + orgId + '.msm', 
+            EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', //isActive=false,
             LocaleSidKey='en_US', ProfileId = p.Id, 
             TimeZoneSidKey='America/Los_Angeles', UserName='standarduser'+x+'@testPBBPermSet.msm');
 			users.add(u);
