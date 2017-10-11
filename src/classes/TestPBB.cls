@@ -1,5 +1,5 @@
 /*
-If this class is giving you problems, the most likely cause is your org-specific settings.  
+If this class is giving you problems, the most likely cause is your org-specific settings.
 
 Check validation rules and required fields for account and user, the objects that are used for testing.
 If needed, modify the last two methods here (for test data creation) to follow your org's rules
@@ -9,7 +9,7 @@ If needed, modify the last two methods here (for test data creation) to follow y
 
 @isTest
 private class TestPBB {
-	
+
 	@isTest static void testLeadReassign(){
 		list<Id> leadIds = getIds(createLeads(5));
 
@@ -17,13 +17,13 @@ private class TestPBB {
 		PBBRunAssignmentRules.ReRunAssignmentRules(leadIds);
 		test.StopTest();
 
-		
+
 	}
 
 	@isTest static void testPBBThunder(){
 		list<Id> leadIds = getIds(createLeads(5));
 
-		map<string, string> headers = new map<string, string>(); 
+		map<string, string> headers = new map<string, string>();
 		headers.put('Content-Type', 'application/json');
 		//'Content-Type', 'application/json'
 		Test.setMock(HttpCalloutMock.class, new PBBCalloutMocks(200, 'OK', '{"foo":"bar"}', headers));
@@ -45,12 +45,12 @@ private class TestPBB {
 
 	}
 
-
 	@isTest static void testChatterFollow() {
 		list<user> users = createUsers(2);
 		system.assertEquals(2, users.size());
 
-		list<PBBChatterFollow.ChatterFollow> CFs = new list<PBBChatterFollow.ChatterFollow>();	
+		list<PBBChatterFollow.ChatterFollow> CFs = new list<PBBChatterFollow.ChatterFollow>();
+		list<PBBChatterUnFollow.ChatterFollow> CFUs = new list<PBBChatterUnFollow.ChatterFollow>();
 
 		user admin = createAdmin();
 
@@ -64,28 +64,48 @@ private class TestPBB {
 					system.debug('acct is ' + acctId);
 
 					PBBChatterFollow.ChatterFollow CF = new PBBChatterFollow.ChatterFollow();
+                    PBBChatterUnFollow.ChatterFollow CFU = new PBBChatterUnFollow.ChatterFollow();
 					CF.UserId = u.Id;
 					CF.RecordId = acctId;
 					CFs.add(CF);
+
+                    CFU.UserId = u.Id;
+                    CFU.RecordId = acctId;
+                    CFUs.add(CFU);
 				}
-			}	
+			}
 
 			list<account> accountList = [select Id from Account];
 			system.assertEquals(2, accountList.size());
 
-			test.startTest();	
+			test.startTest();
 			PBBChatterFollow.FollowRecord(CFs);
 			test.stopTest();
-		
+
 			list<EntitySubscription> ESs = [select Id from EntitySubscription where parentId in: acctIds];
 			if (Schema.SObjectType.Account.isFeedEnabled() ){
-				system.assertEquals(4, ESs.size());				
-			} else {
-				system.assertEquals(0, ESs.size());				
+				system.assertEquals(4, ESs.size());
+                //check unfollow behavior
+                PBBChatterUnFollow.UnFollowRecord(CFUs);
+                list<EntitySubscription> ESs2 = [select Id from EntitySubscription where parentId in: acctIds];
+                system.assertEquals(0, ESs2.size());
+                //refollow so we can check the all unfollow behavior
+                PBBChatterFollow.FollowRecord(CFs);
+                list<EntitySubscription> ESs3 = [select Id from EntitySubscription where parentId in: acctIds];
+                system.assertEquals(4, ESs3.size());
+                //allUnfollow
+                list<id> unfollowAllList = new list<id>();
+                for (account a:accountList){
+                    unfollowAllList.add(a.Id);
+                }
+                PBBChatterAllUnFollow.UnFollowRecord(unfollowAllList);
+                list<EntitySubscription> ESs4 = [select Id from EntitySubscription where parentId in: acctIds];
+                system.assertEquals(0, ESs4.size());
+
+            } else {
+				system.assertEquals(0, ESs.size());
 			}
 		}
-
-
 	}
 
 
@@ -111,12 +131,12 @@ private class TestPBB {
 		test.stopTest();
 
 		//asserts--check the users and verify that they have the permission that you think they do
-		list<PermissionSetAssignment> PSAs = [select Id, AssigneeId, PermissionSetId 
+		list<PermissionSetAssignment> PSAs = [select Id, AssigneeId, PermissionSetId
 			from PermissionSetAssignment
 			where AssigneeId in: users and PermissionSetId =: PS.Id];
 
-		system.assertEquals(userCount, PSAs.size()); 
-		
+		system.assertEquals(userCount, PSAs.size());
+
 	}
 
     @isTest static void testDebug(){
@@ -124,12 +144,12 @@ private class TestPBB {
         comments.add('hello');
         comments.add('world');
         system.debug(comments);
-        
+
         test.startTest();
         PBBApexDebug.AddDebug(comments);
         test.stopTest();
     }
-    
+
     @isTest static void testLock(){
 		list<id> acctIds = getIds(createAccts(5));
 		system.debug(acctIds);
@@ -141,14 +161,14 @@ private class TestPBB {
 		PBBUnLock.UnLockRecord(acctIds);
     }
 
-	@isTest static void testPBBDelete() {				
+	@isTest static void testPBBDelete() {
 		list<id> acctIds = getIds(createAccts(5));
 		//there should be 5 accounts created
 		list<account> queriedAccts = [select Id from Account];
 		system.assertEquals(5, queriedAccts.size());
 
 		PBBDelete.DeleteRecord(acctIds);
-		
+
 		//there should be 0 accounts...all deleted
 		queriedAccts = [select Id from Account];
 		system.assertEquals(0, queriedAccts.size());
@@ -156,7 +176,7 @@ private class TestPBB {
 	}
 
 	@isTest static void testPBBDBReresh(){
-		map<string, string> headers = new map<string, string>(); 
+		map<string, string> headers = new map<string, string>();
 		headers.put('Content-Type', 'application/json');
 		//'Content-Type', 'application/json'
 		Test.setMock(HttpCalloutMock.class, new PBBCalloutMocks(200, 'OK', '{"foo":"bar"}', headers));
@@ -195,7 +215,7 @@ private class TestPBB {
 			PBBSharing.whatsTheIdFieldCalled(ot);
 			PBBSharing.getShareTable(ot);
 
-			
+
 		}
 		test.StopTest();
 
@@ -204,14 +224,14 @@ private class TestPBB {
 	//test helpers below
 
 	public static list<string> fakeDBGenerator(integer recordCount){
-		
+
 		list<string> output = new list<string>();
 		for (integer i=0; i<recordCount; i++){
 			output.add('ADF0000000'+string.valueOf(i));
 		}
 		return output;
 	}
-	
+
 
 	private static PermissionSet createPermSet(){
 		PermissionSet PS = new PermissionSet();
@@ -263,8 +283,8 @@ private class TestPBB {
 
         u.FirstName = 'A';
         u.LastName = 'S';
-        u.Email = 'test@test.com';
-        u.Username = 'astest@test.com';
+        u.Email = 'test'+system.now().getTime()+'@test.com';
+        u.Username = 'astest'+system.now().getTime()+'@test.com';
         u.Alias = 'astest';
         u.ProfileId = p.Id;
         u.TimeZoneSidKey    = 'America/Denver';
@@ -280,14 +300,14 @@ private class TestPBB {
 	public static list<user> createUsers(integer numberOfUsers){
 		list<user> users = new list<user>();
 
-		Profile p = [SELECT Id FROM Profile WHERE Name='Standard User']; 
+		Profile p = [SELECT Id FROM Profile WHERE Name='Standard User'];
 
-		
+
 		for (integer i=0; i<numberOfUsers; i++){
 			string x = string.valueOf(i);
-			User u = new User(Alias = 't'+x, Email='standarduser'+x+'@testPBBPermSet.msm', 
-            EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US', 
-            LocaleSidKey='en_US', ProfileId = p.Id, 
+			User u = new User(Alias = 't'+x, Email='standarduser'+x+'@testPBBPermSet.msm',
+            EmailEncodingKey='UTF-8', LastName='Testing' + x, LanguageLocaleKey='en_US',
+            LocaleSidKey='en_US', ProfileId = p.Id,
             TimeZoneSidKey='America/Los_Angeles', UserName='standarduser'+x+'@testPBBPermSet.msm');
 			users.add(u);
 		}
