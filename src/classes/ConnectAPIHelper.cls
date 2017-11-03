@@ -43,7 +43,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  *
  */
 
-global class ConnectApiHelper {
+global class ConnectAPIHelper {
 
     public class InvalidParameterException extends Exception {}
 

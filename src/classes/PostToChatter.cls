@@ -2,7 +2,7 @@
 * Patterned after: https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_annotation_InvocableVariable.htm
 * Chatter with file: https://salesforce.stackexchange.com/questions/117659/upload-a-file-to-a-chatter-feed-in-apex-api-36
 */
-global class PBBChatterPostWithFile {
+global class PostToChatter {
 
     @InvocableMethod(label='Post to Chatter with an Existing File')
     public static List<PostChatterWithFileResult> postWithExistingFile(List<PostChatterWithFileRequest> requests)

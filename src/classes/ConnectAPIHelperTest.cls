@@ -37,7 +37,7 @@ OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
 @IsTest(SeeAllData=true)
-public class ConnectApiHelperTest {
+public class ConnectAPIHelperTest {
 
     @IsTest(SeeAllData=true)
     static void testInvalidMentionType() {

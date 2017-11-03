@@ -25,11 +25,11 @@ public with sharing class PBBTestChatterPostWithFile {
         newGroup.CollaborationType = 'Public';
         upsert newGroup;
 
-        List<PostToChatter.PostChatterWithFileRequest> reqs = new List<PostToChatter.PostChatterWithFileRequest>();
+        List<PBBChatterPostWithFile.PostChatterWithFileRequest> reqs = new List<PBBChatterPostWithFile.PostChatterWithFileRequest>();
 
         for (Account acct : accts)
         {
-            PostToChatter.PostChatterWithFileRequest req = new PostToChatter.PostChatterWithFileRequest();
+            PBBChatterPostWithFile.PostChatterWithFileRequest req = new PBBChatterPostWithFile.PostChatterWithFileRequest();
             req.recordId = acct.id;
             req.fileId = targetfileId;
             req.groupId = newGroup.Id;
@@ -37,7 +37,7 @@ public with sharing class PBBTestChatterPostWithFile {
             reqs.add(req);
         }
 
-        List<PostToChatter.PostChatterWithFileResult> results = PostToChatter.postWithExistingFile(reqs);
+        List<PBBChatterPostWithFile.PostChatterWithFileResult> results = PBBChatterPostWithFile.postWithExistingFile(reqs);
         System.assert(results.size() > 0);
     }
 }

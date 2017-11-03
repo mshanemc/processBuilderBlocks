@@ -1,24 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
 	<types>
-		<members>*</members>
+		<members>ConnectAPIHelper</members>
+		<members>ConnectAPIHelperTest</members>
+		<members>GiveWorkThanksAction</members>
+		<members>GiveWorkThanksActionTest</members>
+		<members>PBBAddPermSet</members>
+		<members>PBBApexDebug</members>
+		<members>PBBCalloutMocks</members>
+		<members>PBBChatterAllUnfollow</members>
+		<members>PBBChatterFollow</members>
+		<members>PBBChatterUnFollow</members>
+		<members>PBBDashboardRefresh</members>
+		<members>PBBDelete</members>
+		<members>PBBLock</members>
+		<members>PBBRunAssignmentRules</members>
+		<members>PBBSharing</members>
+		<members>PBBTestChatterPostWithFile</members>
+		<members>PBBThunder</members>
+		<members>PBBUnlock</members>
+		<members>PBBUtilities</members>
+		<members>PostToChatter</members>
+		<members>TestPBB</members>
+		<members>PBBChatterPostWithFile</members>
 		<name>ApexClass</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexComponent</name>
-	</types>
-	<types>
-		<members>*</members>
-		<name>ApexPage</name>
 	</types>
 	<types>
 		<members>*</members>
 		<name>ApexTrigger</name>
 	</types>
-	<types>
-		<members>*</members>
-		<name>StaticResource</name>
-	</types>	
-	<version>37.0</version>
+	<version>40.0</version>
 </Package>
